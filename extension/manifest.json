@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Chordy – YouTube Chord Practice",
+  "version": "0.1.0",
+  "description": "Personal chord analysis while YouTube plays, sent to Chordy practice.",
+  "permissions": [
+    "tabCapture",
+    "offscreen",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://youtube.com/*",
+    "https://chordy-9rfa.onrender.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Start Chordy capture on this YouTube tab"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch*"
+      ],
+      "js": [
+        "youtube.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://chordy-9rfa.onrender.com/*"
+      ],
+      "js": [
+        "chordy.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
