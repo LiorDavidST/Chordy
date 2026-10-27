@@ -14,10 +14,11 @@ export function estimateBeatGrid(samples,sampleRate){
   let mean=0;for(let j=lo;j<hi;j++)mean+=flux[j];mean/=hi-lo;
   if(flux[i]>mean*2.5&&flux[i]>1e-4&&flux[i]>=flux[i-1]&&flux[i]>flux[i+1])peaks.push(i*hop/sampleRate);
  }
+ const samplePeaks=peaks.slice(0,Math.min(peaks.length,300));
  let bestBpm=null,bestScore=0;
  for(let bpm=60;bpm<=180;bpm++){
   const period=60/bpm;let score=0;
-  for(const t of peaks)for(const u of peaks){if(u<=t)continue;const delta=u-t;if(delta>5)break;
+  for(const t of samplePeaks)for(const u of samplePeaks){if(u<=t)continue;const delta=u-t;if(delta>5)break;
    const cycles=Math.round(delta/period);if(cycles<1||cycles>8)continue;
    const error=Math.abs(delta-cycles*period);
    if(error<.06)score+=(1-error/.06)/Math.sqrt(cycles);
