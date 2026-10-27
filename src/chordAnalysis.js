@@ -1,3 +1,4 @@
+import {estimateBeatGrid} from './beatTracking.js';
 // Local, permission-based harmonic analysis. No server uploads.
 const NAMES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 const TEMPLATES=[];
@@ -49,5 +50,6 @@ for(const run of runs){
   changes.push({time:Math.round(run.start*10)/10,name:run.name,confidence:Math.round(Math.min(1,run.confidence/Math.max(1,run.count))*100)/100});
   last=run.name;
 }
+const beat=estimateBeatGrid(channel.subarray(0,Math.min(channel.length,Math.round(rate*90))),rate);
 onProgress(100);
-return {events:changes,duration:buffer.duration,method:'FFT chroma / weighted temporal smoothing',limitations:'Approximate harmony only. Requires authorized audio; YouTube IFrame does not provide audio for analysis.'}}
+return {events:changes,beat,duration:buffer.duration,method:'FFT chroma / weighted temporal smoothing',limitations:'Approximate harmony only. Requires authorized audio; YouTube IFrame does not provide audio for analysis.'}}
