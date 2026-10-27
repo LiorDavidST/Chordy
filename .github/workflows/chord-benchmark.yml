@@ -21,9 +21,13 @@ jobs:
         run: python -m unittest discover experimental_backend -p 'test_*.py'
       - name: Run 50-case benchmark
         run: python -m experimental_backend.benchmark_50
+      - name: Run stress benchmark (report quality gate)
+        run: python -m experimental_backend.benchmark_stress
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: chordy-synthetic-50-report
-          path: benchmark-report.json
+          path: |
+            benchmark-report.json
+            benchmark-stress-report.json
           if-no-files-found: warn
