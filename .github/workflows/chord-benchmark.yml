@@ -1,0 +1,29 @@
+name: Chordy synthetic chord benchmark
+on:
+  push:
+    branches:
+      - experiment/render-chord-backend
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CPU dependencies
+        run: pip install -r experimental_backend/requirements.txt
+      - name: Run existing tests
+        run: python -m unittest discover experimental_backend -p 'test_*.py'
+      - name: Run 50-case benchmark
+        run: python -m experimental_backend.benchmark_50
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: chordy-synthetic-50-report
+          path: benchmark-report.json
+          if-no-files-found: warn
