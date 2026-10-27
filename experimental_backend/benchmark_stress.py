@@ -88,10 +88,12 @@ def main():
     with open("benchmark-stress-report.json", "w") as file:
         json.dump(report, file, indent=2)
     print(json.dumps({k: v for k, v in report.items() if k not in ("rows", "sequence_scores")}, indent=2))
-    if report["sequence_correct"] < .75 * report["sequence_total"]:
-        print("QUALITY_GATE: FAIL (sequence accuracy below 75%)")
-    else:
-        print("QUALITY_GATE: PASS")
+    single_accuracy = report["single_chord_correct"] / report["single_chord_total"]
+    sequence_accuracy = report["sequence_correct"] / report["sequence_total"]
+    print(f"QUALITY_METRICS: single={single_accuracy:.1%}, sequence={sequence_accuracy:.1%}")
+    if single_accuracy < .85 or sequence_accuracy < .75:
+        raise SystemExit("QUALITY_GATE: FAIL (single >=85%, sequence >=75% required)")
+    print("QUALITY_GATE: PASS")
 
 if __name__ == "__main__":
     main()
