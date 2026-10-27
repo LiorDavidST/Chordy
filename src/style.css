@@ -1,1 +1,28 @@
 *{box-sizing:border-box}body{margin:0;background:#f6f7f9;color:#20242b;font:16px system-ui,Arial}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:12px 16px;background:#087f83;color:white}button:disabled{opacity:.5}main{max-width:900px;margin:auto;padding:16px 16px 110px;direction:rtl}header{display:flex;justify-content:space-between;align-items:center;margin:0 0 16px}h1{font-size:26px;margin:0}h2{font-size:20px}p{color:#64748b}.search{display:flex;gap:8px;margin:20px 0}.search input{flex:1;min-width:0}input,textarea,select{border:1px solid #cbd5e1;border-radius:9px;padding:11px;background:white;color:#1f2937}input[type=number]{width:100px}.songlist{display:grid;gap:8px}.song{display:flex;align-items:center;text-align:right;gap:12px;background:white;color:#222;border:1px solid #dbe2ea;width:100%}.song img{width:55px;height:55px;border-radius:7px}.song span{flex:1}.song small{display:block;color:#64748b}.back{background:transparent;color:#087f83;padding:8px}.message{color:#b45309}.player-title{margin:12px 0 20px}.player-title small{display:block;color:#64748b}.chord-area{background:white;border:1px solid #e2e8f0;border-radius:15px;padding:10px;min-height:400px}.gridviewport{position:relative;height:min(55vh,520px);overflow-y:auto;scroll-behavior:smooth}.chordgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;direction:ltr;padding:10px}.gridcell{height:85px;border:1px solid #edf0f4;background:#f7f8fa;color:#20242b;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;font-size:24px;text-align:left}.gridcell small{font-size:11px;color:#778294}.gridcell.playing{background:#087f83;color:white}.gridcell.playing small{color:#dff}.empty{text-align:center;padding:80px 12px}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0}.toolbar button{background:#e8f2f2;color:#087f83}.toolbar select{width:auto}.transport{position:sticky;bottom:0;background:#13202a;color:white;border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px;z-index:3}.transport audio{width:100%;height:42px}.transport button{background:#087f83}.transport span{font-size:22px;font-weight:700}.details{background:white;border:1px solid #dce3eb;border-radius:12px;margin:12px 0;padding:14px}.details summary{cursor:pointer;font-weight:600}.details .search{margin:12px 0}.details textarea{width:100%;min-height:130px;direction:ltr;display:block;margin:10px 0}.details audio{width:100%}.ytbox{width:100%;aspect-ratio:16/9;background:#111;border-radius:10px;overflow:hidden;margin:10px 0}.ytbox iframe{width:100%;height:100%}.kbd{display:flex;direction:ltr;overflow:auto}.key{min-width:34px;height:110px;background:white;border:1px solid #64748b;color:#111;text-align:center;padding-top:80px;font-size:10px}.key.black{background:#273142;color:white;height:75px;padding-top:48px;min-width:23px}.key.active{background:#fbbf24;color:#111}.note{font-size:13px;color:#64748b}.result-count{color:#64748b;font-size:13px}@media(max-width:600px){main{padding:12px 10px 100px}.gridcell{height:70px;font-size:21px;padding:9px}.chord-area{padding:4px}.transport{border-radius:10px}}
+/* Chordify-inspired practice view: horizontally timed chords and compact piano diagrams. */
+main{max-width:1250px}
+.chord-area{min-height:260px;padding:20px;overflow:hidden}
+.chord-heading{display:flex;gap:36px;align-items:center;justify-content:flex-start;padding:4px 8px 18px;border-bottom:1px solid #e5e7eb}
+.chord-heading div{display:flex;flex-direction:column;gap:3px;min-width:120px}
+.chord-heading small{font-size:12px;color:#64748b}
+.chord-heading strong{font-size:38px;color:#087f83}
+.chord-heading div:nth-child(2) strong{font-size:26px;color:#475569}
+.chord-heading>span{margin-inline-start:auto;color:#64748b;font-variant-numeric:tabular-nums}
+.gridviewport{height:auto;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth}
+.chordgrid{display:flex;gap:3px;min-width:max-content;padding:12px 0;direction:ltr}
+.gridcell{flex:0 0 100px;height:90px;border-radius:4px;border-inline-start:4px solid #94a3b8;padding:12px;background:#f8fafc}
+.gridcell.playing{background:#263a3b;color:white;border-inline-start-color:#087f83}
+.gridcell.playing small{color:#d5f4f2}
+.piano-row{display:flex;gap:16px;overflow-x:auto;padding:22px 4px 8px;direction:ltr}
+.piano-card{flex:1;min-width:210px;text-align:center}
+.piano-card>b{display:block;font-size:24px;padding:8px}
+.piano{display:flex;justify-content:center;height:112px;border:1px solid #9ca3af;border-radius:5px;overflow:hidden;background:white}
+.piano-key{position:relative;flex:1;border-right:1px solid #aab0b9;background:#fff;min-width:0}
+.piano-key.is-black{background:#20242b;height:65%;z-index:1;margin:0 -3px;flex:.65}
+.piano-key.is-active{background:#9de1dc}
+.piano-key.is-black.is-active{background:#087f83}
+.piano-key small{position:absolute;bottom:4px;left:0;right:0;font-size:9px;color:#17252b}
+.piano-key.is-black small{color:white}
+.ytbox{max-width:100%;margin-top:16px}
+.details[open]{border-color:#9acaca}
+@media(max-width:600px){.chord-area{padding:10px}.gridcell{flex-basis:78px;height:78px}.chord-heading{gap:15px}.chord-heading div{min-width:72px}.chord-heading strong{font-size:30px}.piano-card{min-width:185px}}
